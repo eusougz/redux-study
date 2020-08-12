@@ -1,5 +1,5 @@
 # redux-study
-Projeto para estudos de Redux utilizando React.
+Projeto para estudos de Redux utilizando JS puro.
 
 ## author
 [@eusougz](https://www.linkedin.com/in/guilherme-giacomin-44b14b179/)
