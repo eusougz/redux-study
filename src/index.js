@@ -1,15 +1,18 @@
-import { store } from './store';
-import { bugAdded, bugRemoved, bugResolved } from './actions';
+import configureStore from "./store/configureStore";
+import { loadBugs, addBug, assignBug, resolveBug } from "./store/bugs";
 
-store.subscribe(() => {
-    console.log('Store changed.', store.getState())
-})
+const store = configureStore();
 
-store.dispatch(bugAdded('Harry potter'));
-store.dispatch(bugAdded('Clean code'));
+store.dispatch(loadBugs());
 
-store.dispatch(bugResolved(1));
+setTimeout(() => {
+  store.dispatch(addBug({ description: "Test" }));
+  store.dispatch(assignBug({ bugId: 4, userId: 1 }));
+  store.dispatch(resolveBug(2));
+}, 2000);
 
-store.dispatch(bugRemoved(1));
+const unsubscribe = store.subscribe(() => {
+  // console.log('Store changed.', store.getState())
+});
 
-store.dispatch(bugResolved(2));
+unsubscribe();
