@@ -97,7 +97,7 @@ export const loadBugs = () => (dispatch, getState) => {
   )
     return;
 
-  dispatch(
+  return dispatch(
     apiCallBegan({
       url,
       onStartLoading: bugsRequested.type,
@@ -119,7 +119,7 @@ export const loadBugs = () => (dispatch, getState) => {
 // Selector
 export const getUnresolvedBugs = createSelector(
   (state) => state.entities.bugs,
-  (bugs) => bugs.filter((bug) => !bug.resolved)
+  (bugs) => bugs.list.filter((bug) => !bug.resolved)
 );
 
 export const getAssignedBugsToUser = createSelector(
@@ -127,7 +127,7 @@ export const getAssignedBugsToUser = createSelector(
     (state) => state.entities.bugs,
     (state, id) => id,
   ],
-  (bugs, id) => bugs.filter((bug) => bug.userId === id)
+  (bugs, id) => bugs.list.filter((bug) => bug.userId === id)
 );
 
 // # Without memoization
